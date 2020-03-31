@@ -5,8 +5,12 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "test": "jest --watchAll",
+    "test: local": "jest --watchAll",
     "test:coverage": "jest --watchAll --coverage",
+
+    "test": "jest",
+    "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls",
+
     "docs": "jsdoc -c jsdoc.json"
   },
   "author": "",
@@ -18,6 +22,8 @@
     "@babel/preset-env": "^7.8.7",
     "axios": "^0.19.2",
     "babel-loader": "^8.0.6",
+    "coveralls": "^3.0.11",
+    "istanbul": "^0.4.5",
     "jest": "^25.2.4",
     "jsdoc": "^3.6.3",
     "rewire": "^4.0.1",
