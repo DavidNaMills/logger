@@ -133,7 +133,7 @@ class Logger {
     error(message) {
         const e = new Error();
         const match = regex.exec(e.stack.split("\n")[2]);
-        this.debug.functionName = match[1].split('\\').pop();
+        this.debug.functionName = match[1].replace(/\\/g,"/").split('/').pop();
         this.debug.lineNumber = match[2];
         this._log(message, ERROR);
     }
@@ -158,7 +158,7 @@ class Logger {
         if (this.level >= WARNING) {
             const e = new Error();
             const match = regex.exec(e.stack.split("\n")[2]);
-            this.debug.functionName = match[1].split('\\').pop();
+            this.debug.functionName = match[1].replace(/\\/g,"/").split('/').pop();
             this.debug.lineNumber = match[2];
             this._log(message, WARNING);
         }
@@ -184,7 +184,7 @@ class Logger {
         if (this.level === DEV) {
             const e = new Error();
             const match = regex.exec(e.stack.split("\n")[2]);
-            this.debug.functionName = match[1].split('\\').pop();
+            this.debug.functionName = match[1].replace(/\\/g,"/").split('/').pop();
             this.debug.lineNumber = match[2];
             this._log(message, DEV);
         }
@@ -210,7 +210,7 @@ class Logger {
         if (this.level >= INFO) {
             const e = new Error();
             const match = regex.exec(e.stack.split("\n")[2]);
-            this.debug.functionName = match[1].split('\\').pop();
+            this.debug.functionName = match[1].replace(/\\/g,"/").split('/').pop();
             this.debug.lineNumber = match[2];
             this._log(message, INFO);
         }
