@@ -39,6 +39,18 @@ const consoleConfig = {
     displaySchema: []
 }
 
+const invalidConfig = {
+    type: 'this is invalid',
+    name: 'Console 1',
+    colors: true,
+    showDate: true,
+    isDebug: {
+        on: true,
+        level: 3,
+    },
+    displaySchema: []
+}
+
 const consoleConfigOnlyLevel = {
     type: 'console',
     onlyLevel: 1,
@@ -59,7 +71,8 @@ const _logSpy = jest.spyOn(Logger, '_log');
 const _consoleSpy = jest.spyOn(Logger, '_console');
 const _functionSpy = jest.spyOn(Logger, '_function');
 
-const consoleErrorMock = jest.spyOn(console, 'error').mockImplementation();
+const consoleErrorMock = jest.spyOn(console, 'error');
+// const consoleErrorMock = jest.spyOn(console, 'error').mockImplementation();
 const consoleWarnMock = jest.spyOn(console, 'warn').mockImplementation();
 const consoleInfoMock = jest.spyOn(console, 'info').mockImplementation();
 const consoleDevMock = jest.spyOn(console, 'log').mockImplementation();
@@ -70,6 +83,7 @@ const consoleDevMock = jest.spyOn(console, 'log').mockImplementation();
 afterEach(() => {
     jest.clearAllMocks()
 });
+
 
 
 describe('Logger test suite', () => {
@@ -101,7 +115,7 @@ describe('Logger test suite', () => {
             expect(_logSpy).toHaveBeenCalledWith(testMsg, ERROR);
             expect(Logger.debug).toEqual({
                 functionName: 'Logger-console-.test.js',
-                lineNumber: '99'
+                lineNumber: '113'
             });
         });
 
@@ -111,7 +125,7 @@ describe('Logger test suite', () => {
             expect(_logSpy).toHaveBeenCalledWith(testMsg, WARNING);
             expect(Logger.debug).toEqual({
                 functionName: 'Logger-console-.test.js',
-                lineNumber: '109'
+                lineNumber: '123'
             });
         });
 
@@ -121,7 +135,7 @@ describe('Logger test suite', () => {
             expect(_logSpy).toHaveBeenCalledWith(testMsg, DEV);
             expect(Logger.debug).toEqual({
                 functionName: 'Logger-console-.test.js',
-                lineNumber: '119'
+                lineNumber: '133'
             });
         });
 
@@ -131,7 +145,7 @@ describe('Logger test suite', () => {
             expect(_logSpy).toHaveBeenCalledWith(testMsg, INFO);
             expect(Logger.debug).toEqual({
                 functionName: 'Logger-console-.test.js',
-                lineNumber: '129'
+                lineNumber: '143'
             });
         });
 
@@ -141,6 +155,22 @@ describe('Logger test suite', () => {
             });
 
             expect(Logger.level).toBe(3);
+
+            Logger.dev(testMsg);
+            expect(_logSpy).not.toHaveBeenCalled();
+            expect(Logger.debug).toEqual({
+                functionName: null,
+                lineNumber: null
+            });
+        });
+        
+        it('should NOT call _log from Logger.warning if using level 1 ', () => {
+            Logger.configLogger({
+                methods: [consoleConfig],
+                level: 1
+            });
+
+            expect(Logger.level).toBe(1);
 
             Logger.dev(testMsg);
             expect(_logSpy).not.toHaveBeenCalled();
@@ -202,10 +232,23 @@ describe('Logger test suite', () => {
                 level: ERROR
             });
             expect(Logger.level).toBe(1);
-
+            
             Logger._log(testMsg, ERROR);
             expect(_functionSpy).toHaveBeenCalledTimes(1);
             expect(DateClass.createDateString).toHaveBeenCalledTimes(1);
+        });
+        
+        it('should display an error as the method type is neither "console" or "function"', ()=>{
+            Logger.configLogger({
+                methods: [invalidConfig],
+                level: DEV
+            });
+
+            Logger._log(testMsg, ERROR);
+            expect(_functionSpy).toHaveBeenCalledTimes(0);
+            expect(_consoleSpy).toHaveBeenCalledTimes(0);
+            expect(consoleErrorMock).toHaveBeenCalledTimes(1);
+            expect(consoleErrorMock).toHaveBeenCalledWith('Invalid channel type: [console, function]');
         });
 
     });
@@ -215,11 +258,11 @@ describe('Logger test suite', () => {
 
         it('calls _buildString and stringFormatter functions', () => {
             Logger._console(testMsg, ERROR, consoleConfig);
-
+            
             expect(StringClass.buildString).toHaveBeenCalledTimes(1);
             expect(StringClass.stringFormatter).toHaveBeenCalledTimes(1);
         });
-
+        
         it('calls console.ERROR when which=error', () => {
             Logger._console(testMsg, ERROR, consoleConfig);
             expect(consoleErrorMock).toHaveBeenCalledTimes(1);
@@ -239,7 +282,12 @@ describe('Logger test suite', () => {
         it('calls console.DEV when which=dev', () => {
             Logger._console(testMsg, DEV, consoleConfig);
             expect(consoleDevMock).toHaveBeenCalledTimes(1);
-
+        });
+     
+        it('calls console.DEV when which=dev', () => {
+            Logger._console(testMsg, 'BROKEN', consoleConfig);
+            expect(consoleErrorMock).toHaveBeenCalledTimes(1);
+            expect(consoleErrorMock).toHaveBeenCalledWith('Invalid logging type: [ERROR,WARNING, INFO, DEV]');
         });
     });
 

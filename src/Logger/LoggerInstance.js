@@ -66,7 +66,8 @@ class Logger {
                             this._function(compiledData, conf.func, conf.options);
                             break;
                         default:
-                            console.error('Invalid method type: [console, function]');
+                            this.dateClass.createDateString(),
+                            console.error('Invalid channel type: [console, function]');
                             break;
                     }
                 } // end of if
@@ -100,6 +101,7 @@ class Logger {
                 console.log(strComp);
                 break;
             default:
+                console.error('Invalid logging type: [ERROR,WARNING, INFO, DEV]');
                 break
         }
     }

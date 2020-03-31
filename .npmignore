@@ -1,0 +1,11 @@
+node_modules
+docs
+coverage
+tests
+tutorials
+.babelrc
+.gitignore
+.npmignore
+.travis.yml
+coveralls.ymljsdoc.json
+webpack.config.js

@@ -1,16 +1,14 @@
 {
   "name": "@davidnamills/logger",
-  "version": "1.8.0",
+  "version": "1.8.5",
   "description": "A small logger",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
     "test:local": "jest --watchAll",
     "test:coverage": "jest --watchAll --coverage",
-
     "test": "jest",
     "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
-
     "docs": "jsdoc -c jsdoc.json"
   },
   "author": "",
