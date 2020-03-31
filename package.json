@@ -1,0 +1,28 @@
+{
+  "name": "logger",
+  "version": "1.8.0",
+  "description": "A small logger",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "jest --watchAll",
+    "test:coverage": "jest --watchAll --coverage",
+    "docs": "jsdoc -c jsdoc.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.8.7",
+    "axios": "^0.19.2",
+    "babel-loader": "^8.0.6",
+    "jest": "^25.2.4",
+    "jsdoc": "^3.6.3",
+    "rewire": "^4.0.1",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11",
+    "winston": "^3.2.1"
+  }
+}
