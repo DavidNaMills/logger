@@ -100,8 +100,8 @@ describe('Logger test suite', () => {
             expect(_logSpy).toHaveBeenCalledTimes(1);
             expect(_logSpy).toHaveBeenCalledWith(testMsg, ERROR);
             expect(Logger.debug).toEqual({
-                functionName: '\\Logger\\tests\\Logger-console-.test.js',
-                lineNumber: '99:20'
+                functionName: 'Logger-console-.test.js',
+                lineNumber: '99'
             });
         });
 
@@ -110,8 +110,8 @@ describe('Logger test suite', () => {
             expect(_logSpy).toHaveBeenCalledTimes(1);
             expect(_logSpy).toHaveBeenCalledWith(testMsg, WARNING);
             expect(Logger.debug).toEqual({
-                functionName: '\\Logger\\tests\\Logger-console-.test.js',
-                lineNumber: '109:20'
+                functionName: 'Logger-console-.test.js',
+                lineNumber: '109'
             });
         });
 
@@ -120,8 +120,8 @@ describe('Logger test suite', () => {
             expect(_logSpy).toHaveBeenCalledTimes(1);
             expect(_logSpy).toHaveBeenCalledWith(testMsg, DEV);
             expect(Logger.debug).toEqual({
-                functionName: '\\Logger\\tests\\Logger-console-.test.js',
-                lineNumber: '119:20'
+                functionName: 'Logger-console-.test.js',
+                lineNumber: '119'
             });
         });
 
@@ -130,8 +130,8 @@ describe('Logger test suite', () => {
             expect(_logSpy).toHaveBeenCalledTimes(1);
             expect(_logSpy).toHaveBeenCalledWith(testMsg, INFO);
             expect(Logger.debug).toEqual({
-                functionName: '\\Logger\\tests\\Logger-console-.test.js',
-                lineNumber: '129:20'
+                functionName: 'Logger-console-.test.js',
+                lineNumber: '129'
             });
         });
 

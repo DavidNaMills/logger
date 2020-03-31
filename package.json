@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "test: local": "jest --watchAll",
+    "test:local": "jest --watchAll",
     "test:coverage": "jest --watchAll --coverage",
 
     "test": "jest",

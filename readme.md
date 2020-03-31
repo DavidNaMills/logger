@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/DavidNaMills/logger/badge.svg?branch=master)](https://coveralls.io/github/DavidNaMills/logger?branch=master)
+
 # Logger
 Logger is a very simple logging tool with the bare minimal of functionality. Built in are the following options:
 4 different logging levels (Error, Warning, Info, Dev)

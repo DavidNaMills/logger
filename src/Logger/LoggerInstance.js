@@ -4,11 +4,15 @@ const WARNING = 2;
 const INFO = 3;
 const DEV = 4;
 
+const regex = /\((.*):(\d+):(\d+)\)$/
+
+
 /**
  * Logger Class
  * @classdesc
  * Contains the main logging fuctions that are exposed
  */
+
 
 class Logger {
     /**
@@ -128,10 +132,9 @@ class Logger {
      */
     error(message) {
         const e = new Error();
-        const frame = e.stack.split("\n")[2];
-        let lineNumber = `${frame.split(":")[2]}:${frame.split(":")[3]}`;
-        this.debug.functionName = frame.split(":")[1];
-        this.debug.lineNumber = lineNumber.split(")")[0];
+        const match = regex.exec(e.stack.split("\n")[2]);
+        this.debug.functionName = match[1].split('\\').pop();
+        this.debug.lineNumber = match[2];
         this._log(message, ERROR);
     }
 
@@ -154,10 +157,9 @@ class Logger {
 
         if (this.level >= WARNING) {
             const e = new Error();
-            const frame = e.stack.split("\n")[2];
-            let lineNumber = `${frame.split(":")[2]}:${frame.split(":")[3]}`;
-            this.debug.functionName = frame.split(":")[1];
-            this.debug.lineNumber = lineNumber.split(")")[0];
+            const match = regex.exec(e.stack.split("\n")[2]);
+            this.debug.functionName = match[1].split('\\').pop();
+            this.debug.lineNumber = match[2];
             this._log(message, WARNING);
         }
     }
@@ -181,10 +183,9 @@ class Logger {
 
         if (this.level === DEV) {
             const e = new Error();
-            const frame = e.stack.split("\n")[2];
-            let lineNumber = `${frame.split(":")[2]}:${frame.split(":")[3]}`;
-            this.debug.functionName = frame.split(":")[1];
-            this.debug.lineNumber = lineNumber.split(")")[0];
+            const match = regex.exec(e.stack.split("\n")[2]);
+            this.debug.functionName = match[1].split('\\').pop();
+            this.debug.lineNumber = match[2];
             this._log(message, DEV);
         }
     }
@@ -208,10 +209,9 @@ class Logger {
 
         if (this.level >= INFO) {
             const e = new Error();
-            const frame = e.stack.split("\n")[2];
-            let lineNumber = `${frame.split(":")[2]}:${frame.split(":")[3]}`;
-            this.debug.functionName = frame.split(":")[1];
-            this.debug.lineNumber = lineNumber.split(")")[0];
+            const match = regex.exec(e.stack.split("\n")[2]);
+            this.debug.functionName = match[1].split('\\').pop();
+            this.debug.lineNumber = match[2];
             this._log(message, INFO);
         }
     }
