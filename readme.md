@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/DavidNaMills/logger.svg?branch=master)](https://travis-ci.org/DavidNaMills/logger)
 [![Coverage Status](https://coveralls.io/repos/github/DavidNaMills/logger/badge.svg?branch=master)](https://coveralls.io/github/DavidNaMills/logger?branch=master)
 
 # Logger
