@@ -1,5 +1,5 @@
 {
-  "name": "logger",
+  "name": "@davidnamills/logger",
   "version": "1.8.0",
   "description": "A small logger",
   "main": "index.js",
